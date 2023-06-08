@@ -90,13 +90,18 @@ public class ChessGameEngine {
      */
     public boolean playerHasLegalMoves(int playerNum) {
         ArrayList<ChessGamePiece> pieces;
+        int pieceColor;
+        
         if (playerNum == 1) {
-            pieces = board.getAllWhitePieces();
+            pieceColor = ChessGamePiece.WHITE;
         } else if (playerNum == 2) {
-            pieces = board.getAllBlackPieces();
+            pieceColor = ChessGamePiece.BLACK;
         } else {
             return false;
         }
+        
+        pieces = board.getAllPieces(pieceColor);
+        
         for (ChessGamePiece currPiece : pieces) {
             if (currPiece.hasLegalMoves(board)) {
                 return true;

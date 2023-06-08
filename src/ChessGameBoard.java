@@ -107,6 +107,28 @@ public class ChessGameBoard extends JPanel{
     }
     // ----------------------------------------------------------
     /**
+     * Gets all the pieces on the board 
+     * 
+     * @param pieceColor the color of the piece as a static value of
+     *        the ChessGamePiece class
+     *
+     * @return ArrayList<ChessGamePiece> the pieces
+     */
+    public ArrayList<ChessGamePiece> getAllPieces(int pieceColor) {
+        ArrayList<ChessGamePiece> pieces = new ArrayList<ChessGamePiece>();
+        for ( int i = 0; i < 8; i++ ){
+            for ( int j = 0; j < 8; j++ ){
+                if ( chessCells[i][j].getPieceOnSquare() != null
+                    && chessCells[i][j].getPieceOnSquare().getColorOfPiece() ==
+                        pieceColor ){
+                    pieces.add( chessCells[i][j].getPieceOnSquare() );
+                }
+            }
+        }
+        return pieces;
+    }
+    // ----------------------------------------------------------
+    /**
      * Create a new ChessGameBoard object.
      */
     public ChessGameBoard(){
