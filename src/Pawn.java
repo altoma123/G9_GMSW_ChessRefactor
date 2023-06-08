@@ -79,7 +79,17 @@ public class Pawn
             int count = 1;
             int maxIter = notMoved ? 2 : 1;
             // check for normal moves
-            while ( count <= maxIter ){ // only loop while we have open slots and have not passed our
+            checkMoves(moves,board,count,maxIter,currRow);
+            
+            // check for enemy capture points
+            checkColor(moves,board);
+            
+        }
+        return moves;
+    }
+    
+    private void checkMoves(ArrayList moves, ChessGameBoard board, int count, int maxIter,int currRow){
+        while ( count <= maxIter ){ // only loop while we have open slots and have not passed our
               // limit
                 if ( isOnScreen( currRow, pieceColumn )
                     && board.getCell( currRow,
@@ -96,8 +106,10 @@ public class Pawn
                         : ( currRow + 1 );
                 count++;
             }
-            // check for enemy capture points
-            if ( getColorOfPiece() == ChessGamePiece.WHITE ){
+    }
+    
+    private void checkColor(ArrayList moves, ChessGameBoard board){
+        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
                 if ( isEnemy( board, pieceRow - 1, pieceColumn - 1 ) ){
                     moves.add( ( pieceRow - 1 ) + "," + ( pieceColumn - 1 ) );
                 }
@@ -114,8 +126,6 @@ public class Pawn
                     moves.add( ( pieceRow + 1 ) + "," + ( pieceColumn + 1 ) );
                 }
             }
-        }
-        return moves;
     }
     /**
      * Creates an icon for this piece depending on the piece's color.
